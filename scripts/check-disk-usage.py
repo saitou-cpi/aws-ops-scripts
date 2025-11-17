@@ -9,6 +9,7 @@
     # 4. 終了コード1で終了
 """
 import shutil
+import sys
 
 
 threshold = 80  # ディスク使用率の閾値（％）
@@ -40,4 +41,4 @@ def log_exceeded(issues: list) -> None:
         print(f"Disk usage exceeded: {usage['usage']:.2f}%")
 
 if __name__ == "__main__":
-    check_disk_usage(threshold)
+    sys.exit(check_disk_usage(threshold))
