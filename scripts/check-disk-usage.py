@@ -40,5 +40,8 @@ def log_exceeded(issues: list) -> None:
     for usage in issues:
         print(f"Disk usage exceeded: {usage['usage']:.2f}%")
 
+def main() -> int:
+    return check_disk_usage(threshold)
+
 if __name__ == "__main__":
-    sys.exit(check_disk_usage(threshold))
+    sys.exit(main())
