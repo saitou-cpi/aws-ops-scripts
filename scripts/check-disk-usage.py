@@ -11,6 +11,8 @@
 import shutil
 import sys
 
+from typing import Dict, List
+
 
 threshold = 80  # ディスク使用率の閾値（％）
 
@@ -22,20 +24,20 @@ def check_disk_usage(threshold: int) -> int:
         return 1
     return 0
 
-def get_disk_usage() -> dict:
+def get_disk_usage() -> Dict[str, float | int]:
     # ディスク使用率を取得するロジック 
     total, used, free = shutil.disk_usage("/")
     usage = used / total * 100
     return {"total": total, "used": used, "free": free, "usage": usage}
 
-def compare_usage(usage: dict, threshold: int) -> list:
+def compare_usage(usage: Dict[str, float | int], threshold: int) -> List[Dict[str, float | int]]:
     # 使用率と閾値を比較し、超えている場合はリストに追加
     issues = []
     if usage["usage"] > threshold:
         issues.append(usage)
     return issues
 
-def log_exceeded(issues: list) -> None:
+def log_exceeded(issues: List[Dict[str, float | int]]) -> None:
     # 超えているディスク使用率をログに出力
     for usage in issues:
         print(f"Disk usage exceeded: {usage['usage']:.2f}%")
